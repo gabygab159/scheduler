@@ -8,6 +8,7 @@ import InterviewerListItem from "./InterviewerListItem";
 // setInterviewer:function - a function that accepts an interviewer id
 
 export default function InterviewerList(props) {
+  console.log("this is interviewer list -->", props.interviewers);
   const interviewers = props.interviewers.map((iteratedInterviewer) => {
     return (
       <InterviewerListItem

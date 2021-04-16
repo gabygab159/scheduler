@@ -1,28 +1,6 @@
 import React from "react";
 
-// function getAppointmentsForDay(state, day) {
-//   const filteredDays = state.days.filter(
-//     (filteredDay) => filteredDay.name === day
-//   );
-
-//   const appointmentPerDay = filteredDays[0].appointments;
-
-//   const appointments = Object.keys(state.appointments);
-//   const matchedAppointments = [];
-//   console.log(appointments);
-
-//   appointmentPerDay.map((id) => {
-//     if (state.appointments[id] === appointments) {
-//       matchedAppointments.push(id);
-//       console.log("map id", id);
-//     }
-//     console.log("matched appointments", matchedAppointments);
-//   });
-// }
-
-// console.log(getAppointmentsForDay(state, "Tuesday"));
-
-export default function getAppointmentsForDay(state, day) {
+const getAppointmentsForDay = (state, day) => {
   let infoForDay = state.days.find((obj) => obj.name === day);
   if (!infoForDay) {
     return [];
@@ -37,4 +15,36 @@ export default function getAppointmentsForDay(state, day) {
     }
   });
   return result;
-}
+};
+
+const getInterview = (state, interview) => {
+  if (!interview) {
+    return null;
+  }
+  const interviewObj = {
+    ...interview,
+    interviewer: { ...state.interviewers[interview.interviewer] },
+  };
+
+  return interviewObj;
+};
+
+const getInterviewersForDay = (state, day) => {
+  let infoForDay = state.days.find((obj) => obj.name === day);
+  if (!infoForDay) {
+    return [];
+  }
+  let interviewersForDay = infoForDay.interviewers;
+  if (!interviewersForDay) {
+    return [];
+  }
+
+  const result = interviewersForDay.map((id) => {
+    if (state.interviewers[id]) {
+      return state.interviewers[id];
+    }
+  });
+  return result;
+};
+
+export { getAppointmentsForDay, getInterview, getInterviewersForDay };
