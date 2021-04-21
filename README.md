@@ -25,3 +25,5 @@ npm run storybook
 ```
 
 ## Screenshots
+
+!['Lanscape scheduler screenshot'](https://github.com/gabygab159/scheduler/blob/day2-immutable-objects/docs/Scheduler_screenshot.png?raw=true)
