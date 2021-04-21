@@ -7,7 +7,6 @@ import Form from "./Form";
 import Status from "./Status";
 import Error from "./Error.js";
 import useVisualMode from "hooks/useVisualMode.js";
-import getInterviewersForDay from "helpers/selectors";
 import Confirm from "./Confirm";
 
 export default function Appointment(props) {

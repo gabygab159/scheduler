@@ -1,5 +1,4 @@
-import React from "react";
-
+// Finds all appointments for given day
 const getAppointmentsForDay = (state, day) => {
   let infoForDay = state.days.find((obj) => obj.name === day);
   if (!infoForDay) {
@@ -17,6 +16,7 @@ const getAppointmentsForDay = (state, day) => {
   return result;
 };
 
+// Finds interview object
 const getInterview = (state, interview) => {
   if (!interview) {
     return null;
@@ -29,6 +29,7 @@ const getInterview = (state, interview) => {
   return interviewObj;
 };
 
+// Finds an array of all interviewers for given day
 const getInterviewersForDay = (state, day) => {
   let infoForDay = state.days.find((obj) => obj.name === day);
   if (!infoForDay) {
@@ -38,7 +39,6 @@ const getInterviewersForDay = (state, day) => {
   if (!interviewersForDay) {
     return [];
   }
-
   const result = interviewersForDay.map((id) => {
     if (state.interviewers[id]) {
       return state.interviewers[id];

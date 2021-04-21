@@ -21,7 +21,7 @@ import Appointment from "components/Appointment";
 afterEach(cleanup);
 
 describe("Application", () => {
-  xit("defaults to Monday and changes the schedule when a new days is selected", () => {
+  it("defaults to Monday and changes the schedule when a new days is selected", () => {
     const { getByText } = render(<Application />);
     return waitForElement(() => getByText("Monday")).then(() => {
       fireEvent.click(getByText("Tuesday"));
@@ -29,7 +29,7 @@ describe("Application", () => {
     });
   });
 
-  xit("loads, data, books and interview and reduces the spots remaining for Monday by 1", async () => {
+  it("loads, data, books and interview and reduces the spots remaining for Monday by 1", async () => {
     const { container, debug } = render(<Application />);
     await waitForElement(() => getByText(container, "Archie Cohen"));
     const appointments = getAllByTestId(container, "appointment");
@@ -49,12 +49,8 @@ describe("Application", () => {
       queryByText(day, "Monday")
     );
     expect(getByText(day, "no spots remaining")).toBeInTheDocument();
-
-    // debug(appointment);
-
-    // console.log(prettyDOM(day));
   });
-  xit("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
+  it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
     // 1. Render the Application.
     const { container, debug } = render(<Application />);
     // 2. Wait until the text "Archie Cohen" is displayed.
@@ -79,8 +75,6 @@ describe("Application", () => {
       queryByText(day, "Monday")
     );
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
-
-    debug();
   });
   it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
     // 1 render the component
@@ -99,7 +93,6 @@ describe("Application", () => {
       target: { value: "Lydia Miller-Jones" },
     });
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
-
     // 5 Click the save button
     fireEvent.click(getByText(appointment, "Save"));
     // 6 Check that element "SAVING" is displayed
@@ -111,11 +104,10 @@ describe("Application", () => {
       queryByText(day, "Monday")
     );
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
-    // debug();
   });
   it("shows the save error when failing to save an appointment", async () => {
     // provides fake error
-    // axios.put.mockRejectedValueOnce();
+    axios.put.mockRejectedValueOnce();
     //  1. render component
     const { container, debug } = render(<Application />);
     //  2.
@@ -133,9 +125,7 @@ describe("Application", () => {
     fireEvent.click(getByText(appointment, "Save"));
     expect(getByText(appointment, "SAVING")).toBeInTheDocument();
     // 5. look for the error message
-    waitForElement(() => getByText(appointment, "Did not save!"));
-
-    // debug();
+    await waitForElement(() => getByText(appointment, "Did not save!"));
   });
 
   it("shows the delete error when failing to delete an existing appointment", async () => {

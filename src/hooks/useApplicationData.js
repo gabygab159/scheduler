@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData() {
@@ -11,6 +11,7 @@ export default function useApplicationData() {
 
   const setDay = (day) => setState({ ...state, day });
 
+  // updates spots when appointment is booked or canceled
   const numberOfSpots = (state, day) => {
     const newState = { ...state };
     const specificDay = state.days.find((day) => day.name === state.day);
@@ -21,7 +22,7 @@ export default function useApplicationData() {
     specificDay.spots = numberOfSpots;
     return newState;
   };
-
+  // Cancels an existing interview
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
@@ -39,7 +40,7 @@ export default function useApplicationData() {
       });
     });
   }
-
+  // Books a new interview
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],

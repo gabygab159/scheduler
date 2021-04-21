@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
-import className from "classnames";
 
 export default function Form(props) {
   const [name, setName] = useState(props.name || "");
@@ -41,9 +40,6 @@ export default function Form(props) {
               setName(event.target.value);
             }}
             data-testid="student-name-input"
-            /*
-            This must be a controlled component
-            */
           />
         </form>
         <section className="appointment__validation">{error}</section>
