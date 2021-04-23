@@ -12,11 +12,9 @@ export default function useVisualMode(initial) {
   };
 
   const back = () => {
-    console.log("history state -->", history);
     if (history.length < 2) {
       return;
     }
-
     setHistory((prev) => [...prev.slice(0, prev.length - 1)]);
   };
 
