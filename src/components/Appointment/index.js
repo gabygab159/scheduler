@@ -30,16 +30,20 @@ export default function Appointment(props) {
       interviewer,
     };
 
-    transition(SAVING);
+    if (name && interviewer) {
+      transition(SAVING);
 
-    props
-      .bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
+      props
+        .bookInterview(props.id, interview)
+        .then(() => transition(SHOW))
 
-      .catch((error) => {
-        transition(ERROR_SAVE, true);
-        console.error(error);
-      });
+        .catch((error) => {
+          transition(ERROR_SAVE, true);
+          console.error(error);
+        });
+    } else {
+      alert("Please select an interviewer");
+    }
   }
 
   function destroy(event) {
