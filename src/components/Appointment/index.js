@@ -35,6 +35,7 @@ export default function Appointment(props) {
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
+
       .catch((error) => {
         transition(ERROR_SAVE, true);
         console.error(error);
@@ -103,7 +104,7 @@ export default function Appointment(props) {
           />
         )}
         {mode === ERROR_SAVE && (
-          <Error message="Did not save!" onClose={back} />
+          <Error message="Did not save!" onClose={() => transition(CREATE)} />
         )}
         {mode === ERROR_DELETE && (
           <Error message="Did not delete!" onClose={back} />
