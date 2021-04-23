@@ -77,8 +77,6 @@ export default function Appointment(props) {
         )}
         {mode === CREATE && (
           <Form
-            name={props.name}
-            value={props.value}
             interviewers={props.interviewers}
             onCancel={back}
             onSave={save}
@@ -95,8 +93,8 @@ export default function Appointment(props) {
         )}
         {mode === EDIT && (
           <Form
-            name={props.name ? props.name : props.interview.student}
-            value={props.value}
+            name={props.interview.student}
+            // value={props.value}
             interviewers={props.interviewers}
             onCancel={back}
             onSave={save}
@@ -104,7 +102,7 @@ export default function Appointment(props) {
           />
         )}
         {mode === ERROR_SAVE && (
-          <Error message="Did not save!" onClose={() => transition(CREATE)} />
+          <Error message="Did not save!" onClose={back} />
         )}
         {mode === ERROR_DELETE && (
           <Error message="Did not delete!" onClose={back} />
